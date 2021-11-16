@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import UploadButton from 'pages/UploadRidsPage/components/UploadButton';
 import UploadDialog from 'pages/UploadRidsPage/components/UploadDialog';
 import UploadRidsContext from 'pages/UploadRidsPage/UploadRidsContext';
-import { useUploadModalControls } from 'pages/UploadRidsPage/hooks';
+import { RidWithAsin, useUploadModalState } from 'pages/UploadRidsPage/hooks';
+import RootContext from 'pages/RootPage/RootContext';
 
 const UploadRidsPage = () => {
-  const { isModalOpen, closeModal, openModal } = useUploadModalControls();
+  const rootContext = useContext(RootContext);
+  const { isModalOpen, closeModal, openModal } = useUploadModalState();
+  const [result, setResult] = useState<RidWithAsin[] | null>(null);
+
+  useEffect(() => {
+    rootContext?.setSearchData(result);
+  }, [result]);
 
   return (
     <UploadRidsContext.Provider
@@ -13,6 +20,8 @@ const UploadRidsPage = () => {
         isModalOpen,
         closeModal,
         openModal,
+        result,
+        setResult,
       }}
     >
       <UploadButton />

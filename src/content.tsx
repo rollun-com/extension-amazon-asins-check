@@ -1,7 +1,7 @@
-import UploadRidsPage from 'pages/UploadRidsPage';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './content.css';
+import Root from 'pages/RootPage';
 
 const app = document.createElement('div');
 app.id = 'my-extension';
@@ -11,4 +11,4 @@ app.style.left = '0';
 app.style.marginTop = '100px';
 
 document.body.appendChild(app);
-ReactDOM.render(<UploadRidsPage />, app);
+ReactDOM.render(<Root />, app);

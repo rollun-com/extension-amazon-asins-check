@@ -17,9 +17,10 @@
   "content_scripts": [
     {
       "matches": ["https://www.amazon.com/*"],
-      "css": ["static/css/content.css"],
+      "css": ["static/css/1.css"],
       "js": [
         "static/js/0.js",
+        "static/js/1.js",
         "static/js/runtime-content.js",
         "static/js/content.js"
       ],
@@ -30,6 +31,6 @@
 
   "permissions": [
     "https://rollun.net/api/datastore/AmazonProductsCrossMatch",
-    "http://localhost:8080"
+    "https://rollun.net/api/datastore/AmazonMsinRidCheck"
   ]
 }

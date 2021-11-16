@@ -6,11 +6,8 @@ const httpErrorHandler = (
 ) => {
   if (err.isAxiosError) {
     const {
-      response: { status, statusText, data = '' },
+      response: { statusText, data = '' },
     } = err;
-    if (status === 403) {
-      localStorage.setItem('LAST_403_PATH', window.location.pathname);
-    }
     const stringResponseBody =
       typeof data === 'string'
         ? data
@@ -18,7 +15,7 @@ const httpErrorHandler = (
             .map((row) => row.join(': '))
             .join(', ');
     callback(
-      status || 0,
+      err?.response?.status || 0,
       `${statusText ? `${statusText}. ` : ''}${
         data.message || stringResponseBody
       }`,

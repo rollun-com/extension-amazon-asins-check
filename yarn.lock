@@ -2149,7 +2149,7 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@typescript-eslint/eslint-plugin@^4.5.0":
+"@typescript-eslint/eslint-plugin@^4.6.1":
   version "4.33.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.33.0.tgz#c24dc7c8069c7706bc40d99f6fa87edcb2005276"
   integrity sha512-aINiAxGVdOl1eJyVjaWn/YcVAq4Gi/Yo35qHGCnqbWVz61g39D0h23veY/MA0rFFGfxK7TySg2uwDeNv+JgVpg==
@@ -2198,7 +2198,7 @@
     eslint-scope "^5.0.0"
     eslint-utils "^2.0.0"
 
-"@typescript-eslint/parser@^4.5.0":
+"@typescript-eslint/parser@^4.6.1":
   version "4.33.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-4.33.0.tgz#dfe797570d9694e560528d18eecad86c8c744899"
   integrity sha512-ZohdsbXadjGBSK0/r+d87X0SBmKzOq4/S5nzK6SBgJspFo9/CUDJ7hjayuze+JK7CZQLDMroqytp7pOcFKTxZA==
@@ -5094,7 +5094,7 @@ eslint-webpack-plugin@^2.5.2:
     micromatch "^4.0.2"
     schema-utils "^3.0.0"
 
-eslint@^7.11.0:
+eslint@^7.12.1:
   version "7.32.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.32.0.tgz#c6d328a14be3fb08c8d1d21e12c02fdb7a2a812d"
   integrity sha512-VHZ8gX+EDfz+97jGcgyGCyRia/dPOd6Xh9yPv8Bl1+SoaIwD+a/vlrOmGRUyOYu7MwUhc7CxqeaDZU13S4+EpA==
@@ -7630,6 +7630,11 @@ locate-path@^6.0.0:
   integrity sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==
   dependencies:
     p-locate "^5.0.0"
+
+locutus@^2.0.12:
+  version "2.0.15"
+  resolved "https://registry.yarnpkg.com/locutus/-/locutus-2.0.15.tgz#d75b9100713aaaf30be8b38ed6543910498c0db0"
+  integrity sha512-2xWC4RkoAoCVXEb/stzEgG1TNgd+mrkLBj6TuEDNyUoKeQ2XzDTyJUC23sMiqbL6zJmJSP3w59OZo+zc4IBOmA==
 
 lodash-es@^4.17.21:
   version "4.17.21"
@@ -10331,6 +10336,14 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
+
+rollun-ts-rql@^0.9.4:
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/rollun-ts-rql/-/rollun-ts-rql-0.9.4.tgz#d08b6910fcbce8cda1f5c609ec311794cb96b3ba"
+  integrity sha512-Mc107cpO9/gYZcvx7I/ahduFuMAVzteSSrSQkTG4VHI6WVmk2esZl+a8OCl7vE14AvglaZLfErffBLuumr+64Q==
+  dependencies:
+    locutus "^2.0.12"
+    lodash "^4.17.20"
 
 rollup-plugin-babel@^4.3.3:
   version "4.4.0"

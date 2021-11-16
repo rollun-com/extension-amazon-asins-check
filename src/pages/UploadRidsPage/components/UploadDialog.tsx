@@ -8,22 +8,18 @@ import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import DialogTitle from '@mui/material/DialogTitle';
-import {
-  RequestStatus,
-  useGetRidsWithAsinsByUrl,
-  useUrlInput,
-} from 'pages/UploadRidsPage/hooks';
+import { useGetRidsWithAsins, useUrlInput } from 'pages/UploadRidsPage/hooks';
 import { CircularProgress } from '@mui/material';
 import ErrorText from 'UI/ErrorText';
+import { RequestStatus } from 'common/hooks';
 
 const UploadDialog = () => {
   const context = useContext(UploadRidsContext);
   const { url, setUrl, isUrlValid } = useUrlInput('');
-  const [{ status, result, description }, getRidsWithAsinsByUrl] =
-    useGetRidsWithAsinsByUrl();
+  const [{ status, description }, getRidsWithAsinsByUrl] =
+    useGetRidsWithAsins();
 
-  console.log('result', result);
-  return !!context?.isModalOpen ? (
+  return (
     <Dialog open={!!context?.isModalOpen} onClose={context?.closeModal}>
       {status === RequestStatus.Loading ? (
         <CircularProgress />
@@ -58,7 +54,9 @@ const UploadDialog = () => {
             <Button onClick={context?.closeModal}>Cancel</Button>
             <Button
               disabled={!isUrlValid}
-              onClick={() => getRidsWithAsinsByUrl(url)}
+              onClick={async () =>
+                context?.setResult(await getRidsWithAsinsByUrl(url))
+              }
             >
               Submit
             </Button>
@@ -66,7 +64,7 @@ const UploadDialog = () => {
         </>
       )}
     </Dialog>
-  ) : null;
+  );
 };
 
 export default UploadDialog;

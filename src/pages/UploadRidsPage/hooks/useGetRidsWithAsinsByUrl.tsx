@@ -1,56 +1,16 @@
-import { useState } from 'react';
-import { httpErrorHandlerPromised } from 'common/httpErrorHandler';
-import { httpClient } from 'common/httpClient';
+import { useLazyQuery } from 'common/hooks';
 
-type UseGetRidsWithAsinsByUrl = () => [RequestState, (url: string) => void];
-enum RequestStatus {
-  Loading = 'loading',
-  Idle = 'idle',
-  Error = 'error',
-  Loaded = 'loaded',
-}
-type RequestState = {
-  status: RequestStatus;
-  description: string;
-  result: any | null;
+export type RidWithAsin = {
+  id: string;
+  date: string;
+  rid: string;
+  asin: string;
+  asinist: number;
+  notes: string;
+  decision: number;
+  operator: 'manager' | 'auto';
 };
 
-const useGetRidsWithAsinsByUrl: UseGetRidsWithAsinsByUrl = () => {
-  const [requestState, setRequestState] = useState<RequestState>({
-    status: RequestStatus.Idle,
-    result: null,
-    description: '',
-  });
+const useGetRidsWithAsins = () => useLazyQuery<RidWithAsin[]>();
 
-  const changeRequestState = (state: Partial<RequestState>) => {
-    setRequestState((prevState) => ({
-      ...prevState,
-      ...state,
-    }));
-  };
-
-  const fetchByUrl = async (url: string) => {
-    try {
-      changeRequestState({
-        status: RequestStatus.Loading,
-      });
-      const { data } = await httpClient.get(url);
-
-      changeRequestState({
-        status: RequestStatus.Loaded,
-        result: data,
-      });
-    } catch (e) {
-      const { text } = await httpErrorHandlerPromised(e);
-
-      changeRequestState({
-        status: RequestStatus.Error,
-        description: text,
-      });
-    }
-  };
-
-  return [requestState, fetchByUrl];
-};
-
-export { useGetRidsWithAsinsByUrl, RequestStatus };
+export { useGetRidsWithAsins };
