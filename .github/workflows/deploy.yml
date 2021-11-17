@@ -43,5 +43,5 @@ jobs:
         uses: adrey/slack-file-upload-action@master
         with:
           token: ${{ secrets.SLACK_TOKEN }}
-          path: ${{ github.event.repository.name }}-${{  steps.tagName.outputs.tag }}.zip
+          path: build/${{ github.event.repository.name }}-${{  steps.tagName.outputs.tag }}.zip
           channel: extension_releases
