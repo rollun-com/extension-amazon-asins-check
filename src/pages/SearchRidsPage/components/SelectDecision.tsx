@@ -26,7 +26,7 @@ const SelectDecision: FC<SelectDecisionProps> = ({ rid, id }) => {
   }
 
   if (status === RequestStatus.Loaded) {
-    alert(`Item with rid ${rid} has been process, you can move to next one`);
+    alert(`Item with rid ${rid} has been processed, yu can move to next one`);
   }
 
   return (

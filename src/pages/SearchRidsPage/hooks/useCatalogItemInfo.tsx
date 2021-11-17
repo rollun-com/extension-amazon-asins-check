@@ -1,4 +1,5 @@
-import { useLazyQuery } from 'common/hooks';
+import { RequestState, useLazyQuery } from 'common/hooks';
+import { CatalogItemInfo } from 'pages/SearchRidsPage/hooks/useItemInfo';
 
 type CatalogItem = {
   rid: string;
@@ -9,9 +10,46 @@ type CatalogItem = {
   csn: string;
   sr_name: string;
 };
+type UseCatalogItemInfo = () => [
+  RequestState<CatalogItem[]>,
+  (url: string) => Promise<CatalogItemInfo | null>,
+];
 
-const useCatalogItemInfo = () => {
-  return useLazyQuery<CatalogItem[]>();
+const useCatalogItemInfo: UseCatalogItemInfo = () => {
+  const [res, getByUrl] = useLazyQuery<CatalogItem[]>();
+
+  const formatCatalogData = (data: CatalogItem[]): CatalogItemInfo | null => {
+    return data.reduce<CatalogItemInfo | null>((acc, curr) => {
+      const { brand, mpn, rid, image, csn, price, sr_name } = curr;
+      const supplierInfo = {
+        csn,
+        price,
+        sr_name,
+      };
+
+      return {
+        brand,
+        mpn,
+        rid,
+        image,
+        suppliers: [...(acc?.suppliers || []), supplierInfo],
+      };
+    }, null);
+  };
+
+  const getItemInfoByUrl = async (
+    url: string,
+  ): Promise<CatalogItemInfo | null> => {
+    const data = await getByUrl(url);
+
+    if (data === null) {
+      return null;
+    }
+
+    return formatCatalogData(data);
+  };
+
+  return [res, getItemInfoByUrl];
 };
 
 export { useCatalogItemInfo };

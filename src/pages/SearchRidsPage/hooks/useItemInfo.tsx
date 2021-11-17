@@ -7,20 +7,23 @@ import {
 import { Eq, GroupBy, Query, QueryStringifier, Select } from 'rollun-ts-rql';
 import SearchRidsContext from 'pages/SearchRidsPage/SearchRidsContext';
 
+export type SupplierInfo = {
+  price: string;
+  csn: string;
+  sr_name: string;
+};
 export type CatalogItemInfo = {
   rid: string;
   brand: string;
   mpn: string;
   image: string;
-  suppliers: {
-    price: string;
-    csn: string;
-    sr_name: string;
-  }[];
+  suppliers: SupplierInfo[];
 };
 
 export type ItemInfo = {
   id: string | undefined;
+  asinist: number | undefined;
+  notes: string | undefined;
   catalog: CatalogItemInfo | null;
   amazon: AmazonItemInfo | null;
 };
@@ -57,32 +60,13 @@ const useItemInfo = () => {
       ),
     ]);
 
-    const catalogInfoFormatted =
-      catalogInfo.status === 'rejected'
-        ? null
-        : catalogInfo.value?.reduce<CatalogItemInfo | null>((acc, curr) => {
-            const { brand, mpn, rid, image, csn, price, sr_name } = curr;
-            const supplierInfo = {
-              csn,
-              price,
-              sr_name,
-            };
-
-            return {
-              brand,
-              mpn,
-              rid,
-              image,
-              suppliers: [...(acc?.suppliers || []), supplierInfo],
-            };
-          }, null);
-
     setResult({
       id: context?.currentSearchItem.id,
-      catalog: catalogInfoFormatted || null,
+      notes: context?.currentSearchItem.notes,
+      asinist: context?.currentSearchItem.asinist,
+      catalog: catalogInfo.status === 'rejected' ? null : catalogInfo.value,
       amazon: amazonInfo.status === 'rejected' ? null : amazonInfo.value,
     });
-    console.log(catalogInfo, amazonInfo);
   }, []);
 
   useEffect(() => {
