@@ -13,8 +13,8 @@ const AmazonInfo: FC<AmazonInfoProps> = ({ amazonInfo }) => {
       <Typography variant="h6">
         <Box fontWeight="bold">Amazon info: </Box>
       </Typography>
-      <Typography>Mpn: {amazonInfo?.bsr || '-'}</Typography>
-      <Typography>Asinist: {amazonInfo?.mpn || '-'}</Typography>
+      <Typography>Bsr: {amazonInfo?.bsr || '-'}</Typography>
+      <Typography>Mpn: {amazonInfo?.mpn || '-'}</Typography>
       <Typography>Notes: {amazonInfo?.brand || '-'}</Typography>
     </Box>
   );

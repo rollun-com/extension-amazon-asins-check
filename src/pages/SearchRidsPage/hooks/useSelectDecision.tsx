@@ -19,11 +19,20 @@ type DecisionStrategyPayload = {
 const useSelectDecision = () => {
   const [res, fetchByUrl] = useLazyQuery();
 
-  const handleDecision = (payload: DecisionStrategyPayload) => {
-    return fetchByUrl('https://rollun.net/api/datastore/AmazonMsinRidCheck', {
-      method: HttpRequestMethods.Put,
-      body: { ...payload, operator: Operators.Manager },
-    });
+  const handleDecision = async (payload: DecisionStrategyPayload) => {
+    const result = await fetchByUrl(
+      'https://rollun.net/api/datastore/AmazonMsinRidCheck',
+      {
+        method: HttpRequestMethods.Put,
+        body: { ...payload, operator: Operators.Manager },
+      },
+    );
+
+    if (result !== null) {
+      alert(
+        `Item with rid ${payload.rid} has been processed, yu can move to next one`,
+      );
+    }
   };
 
   const handleYes = (id: string, rid: string) => {
