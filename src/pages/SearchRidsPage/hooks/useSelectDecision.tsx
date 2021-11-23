@@ -1,8 +1,8 @@
 import { HttpRequestMethods, useLazyQuery } from 'common/hooks';
 
 enum Decisions {
-  Yes = '1',
-  No = '0',
+  Yes = 'yes',
+  No = 'no',
   Empty = 'empty',
 }
 
