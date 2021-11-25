@@ -17,6 +17,7 @@ export type CatalogItemInfo = {
   brand: string;
   mpn: string;
   image: string;
+  title: string;
   suppliers: SupplierInfo[];
 };
 

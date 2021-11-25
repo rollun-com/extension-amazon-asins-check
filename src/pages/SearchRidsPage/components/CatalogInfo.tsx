@@ -16,6 +16,7 @@ const CatalogInfo: FC<CatalogInfoProps> = ({ catalogInfo, asinist, notes }) => {
       <Typography variant="h6">
         <Box fontWeight="bold">Catalog info: </Box>
       </Typography>
+      <Typography>{catalogInfo?.title || 'no title'}</Typography>
       <Typography>Rid: {catalogInfo?.rid || '-'}</Typography>
       <Typography>Brand: {catalogInfo?.brand || '-'}</Typography>
       <Typography>Mpn: {catalogInfo?.mpn || '-'}</Typography>

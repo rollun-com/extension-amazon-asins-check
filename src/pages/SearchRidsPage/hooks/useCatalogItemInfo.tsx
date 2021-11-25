@@ -9,6 +9,7 @@ type CatalogItem = {
   price: string;
   csn: string;
   sr_name: string;
+  title: string;
 };
 type UseCatalogItemInfo = () => [
   RequestState<CatalogItem[]>,
@@ -20,7 +21,7 @@ const useCatalogItemInfo: UseCatalogItemInfo = () => {
 
   const formatCatalogData = (data: CatalogItem[]): CatalogItemInfo | null => {
     return data.reduce<CatalogItemInfo | null>((acc, curr) => {
-      const { brand, mpn, rid, image, csn, price, sr_name } = curr;
+      const { brand, mpn, rid, image, csn, price, sr_name, title } = curr;
       const supplierInfo = {
         csn,
         price,
@@ -32,6 +33,7 @@ const useCatalogItemInfo: UseCatalogItemInfo = () => {
         mpn,
         rid,
         image,
+        title,
         suppliers: [...(acc?.suppliers || []), supplierInfo],
       };
     }, null);
