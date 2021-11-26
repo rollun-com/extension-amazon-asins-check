@@ -52,6 +52,7 @@ const useItemInfo = () => {
                 'mpn',
                 'price',
                 'sr_name',
+                'title',
               ]),
             ),
         )}`,
