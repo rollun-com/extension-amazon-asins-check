@@ -1,4 +1,4 @@
-import { useBinarySessionStateControls } from 'common/hooks';
+import { useBinarySessionStateControls } from 'hooks';
 
 const useSearchState = (initialSearchState?: boolean) => {
   const { state, setTrue, setFalse } = useBinarySessionStateControls(

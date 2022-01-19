@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Button from '@mui/material/Button';
 import { useSelectDecision } from 'pages/SearchRidsPage/hooks';
-import { RequestStatus } from 'common/hooks';
+import { RequestStatus } from 'hooks';
 import LinearProgress from '@mui/material/LinearProgress';
 
 interface SelectDecisionProps {

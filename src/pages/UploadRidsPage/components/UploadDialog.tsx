@@ -11,7 +11,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useGetRidsWithAsins, useUrlInput } from 'pages/UploadRidsPage/hooks';
 import { CircularProgress } from '@mui/material';
 import ErrorText from 'UI/ErrorText';
-import { RequestStatus } from 'common/hooks';
+import { RequestStatus } from 'hooks';
 
 const UploadDialog = () => {
   const context = useContext(UploadRidsContext);

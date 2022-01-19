@@ -1,4 +1,4 @@
-import { useLazyQuery } from 'common/hooks';
+import { useLazyQuery } from 'hooks';
 
 export type RidWithAsin = {
   id: string;

@@ -1,5 +1,5 @@
 import { RidWithAsin } from 'pages/UploadRidsPage/hooks';
-import { useSessionStorageState } from 'common/hooks';
+import { useSessionStorageState } from 'hooks';
 
 const useSearchDataWithControls = (search: RidWithAsin[]) => {
   const [searchIndex, setSearchIndex] = useSessionStorageState(

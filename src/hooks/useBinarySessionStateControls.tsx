@@ -1,5 +1,5 @@
 import { createBinaryStateControls } from 'common/binaryStateConrolsFactory';
-import { useSessionStorageState } from 'common/hooks';
+import { useSessionStorageState } from 'hooks/index';
 
 type UseBinarySessionStateControls = (
   variableName: string,

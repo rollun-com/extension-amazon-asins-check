@@ -2,7 +2,7 @@ import RootContext from 'pages/RootPage/RootContext';
 import UploadRidsPage from 'pages/UploadRidsPage';
 import SearchRidsPage from 'pages/SearchRidsPage';
 import { RidWithAsin } from 'pages/UploadRidsPage/hooks';
-import { useSessionStorageState } from 'common/hooks';
+import { useSessionStorageState } from 'hooks';
 
 const Root = () => {
   const [searchData, setSearchData] = useSessionStorageState<

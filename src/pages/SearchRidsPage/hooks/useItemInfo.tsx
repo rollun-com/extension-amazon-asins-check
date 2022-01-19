@@ -12,6 +12,12 @@ export type SupplierInfo = {
   csn: string;
   sr_name: string;
 };
+
+export type SupplierDescriptions = {
+  sr_name: string;
+  text: string | null;
+};
+
 export type CatalogItemInfo = {
   rid: string;
   brand: string;
@@ -19,6 +25,7 @@ export type CatalogItemInfo = {
   image: string;
   title: string;
   suppliers: SupplierInfo[];
+  descriptions: SupplierDescriptions[];
 };
 
 export type ItemInfo = {
@@ -42,7 +49,7 @@ const useItemInfo = () => {
         `https://rollun.net/api/datastore/ItemInfoWithSupplierInfoView?${QueryStringifier.stringify(
           new Query()
             .setQuery(new Eq('rid', context?.currentSearchItem.rid))
-            .setGroupBy(new GroupBy(['csn', 'price', 'sr_name']))
+            .setGroupBy(new GroupBy(['csn', 'price', 'sr_name', 'description']))
             .setSelect(
               new Select([
                 'csn',
@@ -53,6 +60,7 @@ const useItemInfo = () => {
                 'price',
                 'sr_name',
                 'title',
+                'description',
               ]),
             ),
         )}`,

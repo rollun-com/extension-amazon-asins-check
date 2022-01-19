@@ -1,4 +1,4 @@
-import { RequestState, useLazyQuery } from 'common/hooks';
+import { RequestState, useLazyQuery } from 'hooks';
 import { CatalogItemInfo } from 'pages/SearchRidsPage/hooks/useItemInfo';
 
 type CatalogItem = {
@@ -10,6 +10,7 @@ type CatalogItem = {
   csn: string;
   sr_name: string;
   title: string;
+  description: string | null;
 };
 type UseCatalogItemInfo = () => [
   RequestState<CatalogItem[]>,
@@ -21,20 +22,21 @@ const useCatalogItemInfo: UseCatalogItemInfo = () => {
 
   const formatCatalogData = (data: CatalogItem[]): CatalogItemInfo | null => {
     return data.reduce<CatalogItemInfo | null>((acc, curr) => {
-      const { brand, mpn, rid, image, csn, price, sr_name, title } = curr;
+      const { csn, price, sr_name, description, ...rest } = curr;
       const supplierInfo = {
         csn,
         price,
         sr_name,
       };
+      const supplierDescriptionInfo = {
+        sr_name,
+        text: description,
+      };
 
       return {
-        brand,
-        mpn,
-        rid,
-        image,
-        title,
+        ...rest,
         suppliers: [...(acc?.suppliers || []), supplierInfo],
+        descriptions: [...(acc?.descriptions || []), supplierDescriptionInfo],
       };
     }, null);
   };

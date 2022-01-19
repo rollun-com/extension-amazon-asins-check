@@ -1,4 +1,4 @@
-import { HttpRequestMethods, useLazyQuery } from 'common/hooks';
+import { HttpRequestMethods, useLazyQuery } from 'hooks';
 
 enum Decisions {
   Yes = 'yes',

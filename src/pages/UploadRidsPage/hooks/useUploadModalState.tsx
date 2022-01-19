@@ -1,4 +1,4 @@
-import { useBinaryStateControls } from 'common/hooks';
+import { useBinaryStateControls } from 'hooks';
 
 type UseUploadModalState = (initialOpenValue?: boolean) => {
   isModalOpen: boolean;

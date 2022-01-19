@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import CardMedia from '@mui/material/CardMedia';
 import { useItemInfo } from 'pages/SearchRidsPage/hooks';
-import { RequestStatus } from 'common/hooks';
+import { RequestStatus } from 'hooks';
 import CircularProgress from '@mui/material/CircularProgress';
 import ErrorText from 'UI/ErrorText';
 import { formatImageUrl } from 'common/formatImageUrl';

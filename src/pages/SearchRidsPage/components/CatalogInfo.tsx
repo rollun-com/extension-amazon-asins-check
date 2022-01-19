@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { CatalogItemInfo } from 'pages/SearchRidsPage/hooks';
 import CatalogCsnsInfo from 'pages/SearchRidsPage/components/CatalogCsnsInfo';
+import CatalogDescriptionInfo from 'pages/SearchRidsPage/components/CatalogDescriptionInfo';
 
 interface CatalogInfoProps {
   catalogInfo: CatalogItemInfo | null | undefined;
@@ -23,6 +24,7 @@ const CatalogInfo: FC<CatalogInfoProps> = ({ catalogInfo, asinist, notes }) => {
       <Typography>Asinist: {asinist || '-'}</Typography>
       <Typography>Notes: {notes || '-'}</Typography>
       <CatalogCsnsInfo suppliers={catalogInfo?.suppliers} />
+      <CatalogDescriptionInfo descriptions={catalogInfo?.descriptions} />
     </Box>
   );
 };

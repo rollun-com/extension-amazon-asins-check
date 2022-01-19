@@ -1,4 +1,4 @@
-import { RequestState, useLazyQuery } from 'common/hooks';
+import { RequestState, useLazyQuery } from 'hooks';
 
 export type AmazonItemInfo = {
   bsr: string;
