@@ -1,11 +1,22 @@
 import React, { FC } from 'react';
-import { SupplierInfo } from 'pages/SearchRidsPage/hooks';
+import { SrInfo } from 'pages/SearchRidsPage/hooks';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 interface CatalogCsnsInfoProps {
-  suppliers: SupplierInfo[] | undefined;
+  suppliers: SrInfo[] | undefined;
 }
+
+const ItemPrice: FC<SrInfo> = ({
+  supplier_name,
+  retail_price,
+  dealer_price,
+  csn,
+}) => (
+  <Typography>{`${supplier_name}: ${csn} ($${(+retail_price).toFixed(
+    2,
+  )}) - dealer price($${dealer_price})`}</Typography>
+);
 
 const CatalogCsnsInfo: FC<CatalogCsnsInfoProps> = ({ suppliers }) => {
   return suppliers ? (
@@ -14,10 +25,8 @@ const CatalogCsnsInfo: FC<CatalogCsnsInfoProps> = ({ suppliers }) => {
         <Box fontWeight="bold">Csns for this item: </Box>
       </Typography>
 
-      {suppliers.map(({ sr_name, price, csn }) => (
-        <Typography>{`${sr_name}: ${csn} ($${(+price).toFixed(
-          2,
-        )})`}</Typography>
+      {suppliers.map((item) => (
+        <ItemPrice {...item} key={item.csn} />
       ))}
     </>
   ) : null;

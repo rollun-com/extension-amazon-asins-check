@@ -1,10 +1,13 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
-import { useCatalogItemInfo } from 'pages/SearchRidsPage/hooks/useCatalogItemInfo';
+import {
+  SrInfo,
+  useCatalogItemInfo,
+} from 'pages/SearchRidsPage/hooks/useCatalogItemInfo';
 import {
   AmazonItemInfo,
   useAmazonItemInfo,
 } from 'pages/SearchRidsPage/hooks/useAmazonItemInfo';
-import { Eq, GroupBy, Query, QueryStringifier, Select } from 'rollun-ts-rql';
+import { Eq, Limit, Query, QueryStringifier, Select } from 'rollun-ts-rql';
 import SearchRidsContext from 'pages/SearchRidsPage/SearchRidsContext';
 
 export type SupplierInfo = {
@@ -24,8 +27,8 @@ export type CatalogItemInfo = {
   mpn: string;
   image: string;
   title: string;
-  suppliers: SupplierInfo[];
-  descriptions: SupplierDescriptions[];
+  description: string | null;
+  suppliers: SrInfo[];
 };
 
 export type ItemInfo = {
@@ -46,20 +49,18 @@ const useItemInfo = () => {
   const getItemInfo = useCallback(async () => {
     const [catalogInfo, amazonInfo] = await Promise.allSettled([
       getCatalogInfoByUrl(
-        `https://rollun.net/api/datastore/ItemInfoWithSupplierInfoView?${QueryStringifier.stringify(
+        `https://rollun.net/api/datastore/AmazonMsinRidCheckData?${QueryStringifier.stringify(
           new Query()
             .setQuery(new Eq('rid', context?.currentSearchItem.rid))
-            .setGroupBy(new GroupBy(['csn', 'price', 'sr_name', 'description']))
+            .setLimit(new Limit(1))
             .setSelect(
               new Select([
-                'csn',
                 'rid',
                 'image',
                 'brand',
                 'mpn',
-                'price',
-                'sr_name',
                 'title',
+                'sr_info',
                 'description',
               ]),
             ),

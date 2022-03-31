@@ -1,14 +1,18 @@
 import { RequestState, useLazyQuery } from 'hooks';
 import { CatalogItemInfo } from 'pages/SearchRidsPage/hooks/useItemInfo';
 
+export type SrInfo = {
+  csn: string;
+  dealer_price: number;
+  retail_price: string;
+  supplier_name: string;
+};
 type CatalogItem = {
   rid: string;
   brand: string;
   mpn: string;
   image: string;
-  price: string;
-  csn: string;
-  sr_name: string;
+  sr_info: SrInfo[];
   title: string;
   description: string | null;
 };
@@ -20,25 +24,18 @@ type UseCatalogItemInfo = () => [
 const useCatalogItemInfo: UseCatalogItemInfo = () => {
   const [res, getByUrl] = useLazyQuery<CatalogItem[]>();
 
-  const formatCatalogData = (data: CatalogItem[]): CatalogItemInfo | null => {
-    return data.reduce<CatalogItemInfo | null>((acc, curr) => {
-      const { csn, price, sr_name, description, ...rest } = curr;
-      const supplierInfo = {
-        csn,
-        price,
-        sr_name,
-      };
-      const supplierDescriptionInfo = {
-        sr_name,
-        text: description,
-      };
+  const formatCatalogData = (data: CatalogItem): CatalogItemInfo | null => {
+    const { rid, description, sr_info, mpn, image, title, brand } = data;
 
-      return {
-        ...rest,
-        suppliers: [...(acc?.suppliers || []), supplierInfo],
-        descriptions: [...(acc?.descriptions || []), supplierDescriptionInfo],
-      };
-    }, null);
+    return {
+      brand,
+      description,
+      image,
+      mpn,
+      rid,
+      suppliers: sr_info,
+      title,
+    };
   };
 
   const getItemInfoByUrl = async (
@@ -50,7 +47,7 @@ const useCatalogItemInfo: UseCatalogItemInfo = () => {
       return null;
     }
 
-    return formatCatalogData(data);
+    return formatCatalogData(data[0]);
   };
 
   return [res, getItemInfoByUrl];
